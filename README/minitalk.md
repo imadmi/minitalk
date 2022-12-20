@@ -13,7 +13,7 @@ You execute client like this:
 ➜  minitalk git:(main) ✗ ./client 12750
 ```
 Then just like that the server recieves a signal and outputs a message to the shell
-
+```c
 // client.c
 int	main(int argc, char *argv[])
 {
