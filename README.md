@@ -1,6 +1,6 @@
 
 <h1 align="center">
-	42cursus' minitalk 
+	Minitalk project
 </h1>
 
 
