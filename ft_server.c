@@ -6,11 +6,17 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2022/12/20 22:06:40 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/06 18:52:29 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "ft_minitalk.h"
+
+void	display_banner(int pid)
+{
+	ft_printf("PID: %d\n",pid);
+}
 
 void	signal_error(void)
 {
@@ -69,6 +75,7 @@ int	main(void)
 	struct sigaction	act;
 
 	pid = getpid();
+	display_banner(pid);
 	act.sa_sigaction = action;
 	sigemptyset(&act.sa_mask);
 	act.sa_flags = SA_SIGINFO;

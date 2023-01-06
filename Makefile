@@ -1,3 +1,9 @@
+# Binary Name:
+CLIENT	=	client
+SERVER	=	server
+
+#ft_printf Variables:
+LIBFTPRINTF	=	ft_printf/libftprintf.a
 
 #minitalk variables
 SRC_C	=	ft_client.c
@@ -18,30 +24,34 @@ RESET		=	\e[0m
 _SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
 _INFO		=	[$(YELLOW)INFO$(RESET)]
 
-all: ft_printf/libftprintf.a client server
+all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
-server: $(OBJ_S) $(INC)
-	$(CC) $(CFLAGS) ft_printf/libftprintf.a -o $@ $(OBJ_S)
+$(SERVER): $(OBJ_S) $(INC)
+	$(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
+	clear
 	@printf "$(_SUCCESS) server ready.\n"
 
-client: $(OBJ_C) $(INC)
-	$(CC) $(CFLAGS) ft_printf/libftprintf.a -o $@ $(OBJ_C)
+$(CLIENT): $(OBJ_C) $(INC)
+	$(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
+	clear
 	@printf "$(_SUCCESS) client ready.\n"
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-ft_printf/libftprintf.a:
+$(LIBFTPRINTF):
 	$(MAKE) -C ft_printf
 
 clean:
 	$(MAKE) clean -C ft_printf
 	$(RM) $(OBJ_C) $(OBJ_S)
+	clear
 	@printf "$(_INFO) object files removed.\n"
 
 fclean: clean
 	$(MAKE) fclean -C ft_printf
-	$(RM) client server
+	$(RM) $(CLIENT) $(SERVER)
+	clear
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
 
