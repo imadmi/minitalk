@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/06 18:52:29 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/07 00:25:53 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	display_banner(int pid)
 
 void	signal_error(void)
 {
-	ft_printf("\n%sserver: unexpected error.%s\n", RED, END);
+	ft_printf("\n%sserver: unexpected error.%s\n", RED, RESET);
 	exit(EXIT_FAILURE);
 }
 
@@ -30,7 +30,7 @@ void	extended_action(char *c, int *received, int *client_pid, int *bit)
 	if (*c == '\0')
 	{
 		ft_printf("\n%s%d signal recieved from client PID: %d%s\n",
-			GREEN, *received, *client_pid, END);
+			GREEN, *received, *client_pid, RESET);
 		*received = 0;
 		*c = 0;
 		if (kill(*client_pid, SIGUSR1) == -1)

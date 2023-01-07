@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2022/12/20 14:52:47 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/07 00:25:43 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	signal_error(void)
 {
-	ft_printf("\n%sclient: unexpected error.%s\n", RED, END);
+	ft_printf("\n%sclient: unexpected error.%s\n", RED, RESET);
 	exit(EXIT_FAILURE);
 }
 
@@ -59,7 +59,7 @@ void	recieved(int sig)
 
 	if (sig == SIGUSR1)
 	{
-		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++sent, END);
+		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++sent, RESET);
 		exit(EXIT_SUCCESS);
 	}
 	if (sig == SIGUSR2)
@@ -74,15 +74,15 @@ int	main(int ac, char **av)
 	client_pid = getpid();
 	if (ac == 3)
 	{
-		ft_printf("%sclient pid: %d%s\n", RED, client_pid, END);
+		ft_printf("%sclient pid: %d%s\n", RED, client_pid, RESET);
 		signal(SIGUSR1, recieved);
 		signal(SIGUSR2, recieved);
 		server_pid = ft_atoi(av[1]);
-		ft_printf("%sText currently sending.. %s\n", YELLOW, END);
+		ft_printf("%sText currently sending.. %s\n", YELLOW, RESET);
 		sent_text(av[2], server_pid);
 	}
 	else
 		ft_printf("%susage: ./client <server_pid> <text to send>%s\n",
-			RED, END);
+			RED, RESET);
 	return (EXIT_FAILURE);
 }

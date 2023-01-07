@@ -27,30 +27,29 @@ _INFO		=	[$(YELLOW)INFO$(RESET)]
 all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 $(SERVER): $(OBJ_S) $(INC)
-	$(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
-	clear
+	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
 	@printf "$(_SUCCESS) server ready.\n"
 
 $(CLIENT): $(OBJ_C) $(INC)
-	$(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
+	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
 	clear
 	@printf "$(_SUCCESS) client ready.\n"
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	@ $(CC) $(CFLAGS) -c $< -o $@
 
 $(LIBFTPRINTF):
 	$(MAKE) -C ft_printf
 
 clean:
-	$(MAKE) clean -C ft_printf
-	$(RM) $(OBJ_C) $(OBJ_S)
+	@ $(MAKE) clean -C ft_printf
+	@ $(RM) $(OBJ_C) $(OBJ_S)
 	clear
 	@printf "$(_INFO) object files removed.\n"
 
 fclean: clean
-	$(MAKE) fclean -C ft_printf
-	$(RM) $(CLIENT) $(SERVER)
+	@ $(MAKE) fclean -C ft_printf
+	@ $(RM) $(CLIENT) $(SERVER)
 	clear
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
