@@ -6,10 +6,9 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:37 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/07 00:25:11 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/07 17:03:10 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef FT_MINITALK_H
 # define FT_MINITALK_H

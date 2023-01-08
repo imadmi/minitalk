@@ -6,10 +6,9 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/07 00:25:43 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:38:42 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "ft_minitalk.h"
 
@@ -19,7 +18,7 @@ void	signal_error(void)
 	exit(EXIT_FAILURE);
 }
 
-void	char_to_bin(unsigned char c, int pid)
+void	char_to_binary(unsigned char c, int pid)
 {
 	int	bit;
 
@@ -49,8 +48,8 @@ void	sent_text(char *str, int pid)
 
 	i = 0;
 	while (str[i])
-		char_to_bin(str[i++], pid);
-	char_to_bin('\0', pid);
+		char_to_binary(str[i++], pid);
+	char_to_binary('\0', pid);
 }
 
 void	recieved(int sig)
