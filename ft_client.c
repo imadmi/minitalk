@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/07 13:38:42 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/09 19:47:32 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,30 +42,33 @@ void	char_to_binary(unsigned char c, int pid)
 	}
 }
 
-void	sent_text(char *str, int pid)
+void	sent_text(char *msg, int pid)
 {
 	int	i;
 
 	i = 0;
-	while (str[i])
-		char_to_binary(str[i++], pid);
+	while (msg[i])
+	{
+		char_to_binary(msg[i], pid);
+		i++;
+	}
 	char_to_binary('\0', pid);
 }
 
 void	recieved(int sig)
 {
-	static int	sent;
+	static int	signal;
 
 	if (sig == SIGUSR1)
 	{
-		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++sent, RESET);
+		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++signal, RESET);
 		exit(EXIT_SUCCESS);
 	}
 	if (sig == SIGUSR2)
-		++sent;
+		++signal;
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **argv)
 {
 	int	server_pid;
 	int	client_pid;
@@ -76,9 +79,9 @@ int	main(int ac, char **av)
 		ft_printf("%sclient pid: %d%s\n", RED, client_pid, RESET);
 		signal(SIGUSR1, recieved);
 		signal(SIGUSR2, recieved);
-		server_pid = ft_atoi(av[1]);
+		server_pid = ft_atoi(argv[1]);
 		ft_printf("%sText currently sending.. %s\n", YELLOW, RESET);
-		sent_text(av[2], server_pid);
+		sent_text(argv[2], server_pid);
 	}
 	else
 		ft_printf("%susage: ./client <server_pid> <text to send>%s\n",
