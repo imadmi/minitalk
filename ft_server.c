@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/15 23:37:05 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:33:23 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,11 @@ void	action(int sig, siginfo_t *info, void *context)
 		received = 0;
 	}
 	c = c | (sig == SIGUSR2);
-	// ft_printf("%d\n",c);
+	// ft_printf("%d\n",sig);
 	received++;
 	// ft_printf("%d\n",received);
 	bit++;
-	ft_printf("%d\n",bit);
+	// ft_printf("%d\n",bit);
 	if (bit == 8)
 		tkmila(&c, &received, &client_pid, &bit);
 	c <<= 1;
