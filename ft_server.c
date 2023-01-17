@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/16 23:33:23 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:56:49 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	main(void)
 	ft_printf("PID: %d\n", pid);
 	act.sa_sigaction = action;
 	sigemptyset(&act.sa_mask);
-	// act.sa_flags = SA_SIGINFO;
 	while (1)
 	{
 		sigaction(SIGUSR1, &act, 0);

@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/17 01:11:05 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/17 02:04:34 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	msg_to_binary(unsigned char c, int pid)
 		c = c << 1;
 		bit++;
 		pause();
+		usleep(100);
 	}
 }
 
