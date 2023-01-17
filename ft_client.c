@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/16 23:50:03 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/17 01:11:05 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,29 +21,22 @@ int	main(int ac, char **argv)
 	if (ac == 3)
 	{
 		ft_printf("%sclient pid: %d%s\n", RED, client_pid, RESET);
-		signal(SIGUSR1, recieved);
-		signal(SIGUSR2, recieved);
+		signal(SIGUSR1, wssel);
+		signal(SIGUSR2, wssel);
 		server_pid = ft_atoi(argv[1]);
-		ft_printf("%sText currently sending.. %s\n", YELLOW, RESET);
+		ft_printf("%smessage currently sending.. %s\n", YELLOW, RESET);
 		sent_text(argv[2], server_pid);
 	}
 	else
-		ft_printf("%susage: ./client <server_pid> <text to send>%s\n",
+		ft_printf("%suse: ./client <server_pid> <text to send>%s\n",
 			RED, RESET);
 	return (EXIT_FAILURE);
 }
 
-void	recieved(int sig)
+void	wssel(int sig)
 {
-	static int	signal;
-
 	if (sig == SIGUSR1)
-	{
-		ft_printf("%s%d signal sent successfully!%s\n", GREEN, ++signal, RESET);
-		exit(EXIT_SUCCESS);
-	}
-	if (sig == SIGUSR2)
-		++signal;
+		ft_printf("%smessage sent successfully%s\n", GREEN, RESET);
 }
 
 void	sent_text(char *msg, int pid)
@@ -53,13 +46,13 @@ void	sent_text(char *msg, int pid)
 	i = 0;
 	while (msg[i])
 	{
-		char_to_binary(msg[i], pid);
+		msg_to_binary(msg[i], pid);
 		i++;
 	}
-	char_to_binary('\0', pid);
+	msg_to_binary('\0', pid);
 }
 
-void	char_to_binary(unsigned char c, int pid)
+void	msg_to_binary(unsigned char c, int pid)
 {
 	int	bit;
 
@@ -79,12 +72,11 @@ void	char_to_binary(unsigned char c, int pid)
 		c = c << 1;
 		bit++;
 		pause();
-		usleep(100);
 	}
 }
 
 void	sig_error(void)
 {
-	ft_printf("\n%sclient: unexpected error.%s\n", RED, RESET);
+	ft_printf("\n%serror in the client.%s\n", RED, RESET);
 	exit(EXIT_FAILURE);
 }
