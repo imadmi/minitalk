@@ -6,80 +6,59 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/17 02:56:49 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/18 05:31:28 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_minitalk.h"
 
-int	main(void)
+int	main(int ac, char **av)
 {
-	int					pid;
 	struct sigaction	act;
 
-	pid = getpid();
-	ft_printf("PID: %d\n", pid);
-	act.sa_sigaction = action;
-	sigemptyset(&act.sa_mask);
-	while (1)
+	if (ac == 1)
 	{
-		sigaction(SIGUSR1, &act, 0);
-		sigaction(SIGUSR2, &act, 0);
-		pause();
+		act.sa_sigaction = action;
+		act.sa_flags = SA_SIGINFO;
+		sigaction(SIGUSR1, &act, NULL);
+		sigaction(SIGUSR2, &act, NULL);
+		ft_printf("PID: %d\n", getpid());
+		while (1)
+			pause();
 	}
-	return (EXIT_FAILURE);
+	else
+	{
+		ft_printf("server: unexpected error.\n");
+		exit(1);
+	}	
+	return (0);
 }
 
-void	action(int sig, siginfo_t *info, void *context)
+void	action(int siguser, siginfo_t *info, void *context)
 {
-	static int	client_pid;
-	static int	bit;
+	static int	sender_pid;
 	static char	c;
-	static int	received;
-	static int	current_pid;
+	static int	bit;	
 
-	(void)context;
-	if (!client_pid)
-		client_pid = info->si_pid;
-	current_pid = info->si_pid;
-	if (client_pid != current_pid)
+	(void) context;
+	if (sender_pid != info->si_pid)
 	{
-		client_pid = current_pid;
+		c = (char)255;
 		bit = 0;
-		c = 0;
-		received = 0;
+		sender_pid = info->si_pid;
 	}
-	c = c | (sig == SIGUSR2);
-	// ft_printf("%d\n",sig);
-	received++;
-	// ft_printf("%d\n",received);
+	if (siguser == SIGUSR1)
+		c = c | 128 >> bit;
+	else if (siguser == SIGUSR2)
+		c = c ^ 128 >> bit;
 	bit++;
-	// ft_printf("%d\n",bit);
-	if (bit == 8)
-		tkmila(&c, &received, &client_pid, &bit);
-	c <<= 1;
-	usleep(100);
-	kill(client_pid, SIGUSR2);
-}
-
-void	tkmila(char *c, int *received, int *client_pid, int *bit)
-{
-	ft_printf("%c", *c);
-	if (*c == '\0')
+	if (bit == 9)
 	{
-		ft_printf("\n%s%d signal recieved from client PID: %d%s\n",
-			GREEN, *received, *client_pid, RESET);
-		*received = 0;
-		*c = 0;
-		if (kill(*client_pid, SIGUSR1) == -1)
-			sig_error();
-		return ;
+		if (c == '\0')
+			if (kill(sender_pid, SIGUSR1) == -1)
+				exit(EXIT_FAILURE);
+		ft_printf("%c", c);
+		bit = 0;
+		c = (char)255;
 	}
-	*bit = 0;
-}
-
-void	sig_error(void)
-{
-	ft_printf("\n%sserver: unexpected error.%s\n", RED, RESET);
-	exit(EXIT_FAILURE);
 }
