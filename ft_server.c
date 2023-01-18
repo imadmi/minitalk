@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/18 22:46:44 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:52:03 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	action(int siguser, siginfo_t *info, void *context)
 	else if (siguser == SIGUSR2)
 		c = c ^ 128 >> bit;
 	bit++;
-	if (bit == 9)
+	if (bit == 8)
 	{
 		if (c == '\0')
 			if (kill(sender_pid, SIGUSR1) == -1)

@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/18 05:34:16 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/19 00:52:08 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	bit_sender(int pid, char *s)
 	while (1 && s)
 	{
 		bit = 0;
-		while (bit < 9)
+		while (bit < 8)
 		{
 			if (s[i] & (128 >> bit))
 			{
