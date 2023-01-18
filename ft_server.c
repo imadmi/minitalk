@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/18 05:31:28 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/18 22:46:44 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	main(int ac, char **av)
 {
 	struct sigaction	act;
 
+	(void)**av;
 	if (ac == 1)
 	{
 		act.sa_sigaction = action;

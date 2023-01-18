@@ -1,7 +1,3 @@
-# Binary Name:
-CLIENT	=	client
-SERVER	=	server
-
 #ft_printf Variables:
 LIBFTPRINTF	=	ft_printf/libftprintf.a
 
@@ -14,23 +10,19 @@ INC		=	ft_minitalk.h
 
 #Compiling Variables:
 CC			=	gcc
-CFLAG		=	-Wall -Wextra -Werror
+CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
-#Colors:
-GREEN		=	\e[38;5;118m
-YELLOW		=	\e[38;5;226m
-RESET		=	\e[0m
-_SUCCESS	=	[$(GREEN)SUCCESS$(RESET)]
-_INFO		=	[$(YELLOW)INFO$(RESET)]
+_SUCCESS	=	[\e[38;5;118mSUCCESS\e[0m]
+_INFO		=	[\e[38;5;226mINFO\e[0m]
 
-all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
+all: $(LIBFTPRINTF) client server
 
-$(SERVER): $(OBJ_S) $(INC)
+server: $(OBJ_S) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
 	@printf "$(_SUCCESS) server ready.\n"
 
-$(CLIENT): $(OBJ_C) $(INC)
+client: $(OBJ_C) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
 	clear
 	@printf "$(_SUCCESS) client ready.\n"
@@ -49,7 +41,7 @@ clean:
 
 fclean: clean
 	@ $(MAKE) fclean -C ft_printf
-	@ $(RM) $(CLIENT) $(SERVER)
+	@ $(RM) client server
 	clear
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"
