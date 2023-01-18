@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/18 05:23:10 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/18 05:34:16 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,6 @@ void	bit_sender(int pid, char *s)
 void	wssl(int siguser)
 {
 	if (siguser == SIGUSR1)
-		ft_printf("message sent successfully\n");
+		ft_printf("\033[0;32mmessage sent successfully\033[0m\n");
 	exit (EXIT_SUCCESS);
 }
