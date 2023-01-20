@@ -15,6 +15,7 @@ OBJ_C	=	ft_client.o
 OBJB_S	=	ft_server_bonus.o
 OBJB_C	=	ft_client_bonus.o
 INC		=	ft_minitalk.h
+INCB	=	ft_minitalk_bonus.h
 
 #Compiling Variables:
 CC			=	cc
@@ -28,11 +29,11 @@ all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
 bonus: $(LIBFTPRINTF) $(CLIENTB) $(SERVERB)
 
-$(SERVERB): $(OBJB_S) $(INC)
+$(SERVERB): $(OBJB_S) $(INCB)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJB_S)
 	@printf "$(_SUCCESS) server ready.\n"
 
-$(CLIENTB): $(OBJB_C) $(INC)
+$(CLIENTB): $(OBJB_C) $(INCB)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJB_C)
 	clear
 	@printf "$(_SUCCESS) client ready.\n"

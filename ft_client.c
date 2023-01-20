@@ -6,7 +6,7 @@
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/20 04:23:20 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/21 00:54:47 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	bit_sender(int pid, char *s)
 			else
 				if (kill(pid, SIGUSR2) == -1)
 					exit(EXIT_FAILURE);
-			usleep(500);
+			usleep(700);
 			bit++;
 		}
 		if (s[i] == '\0')
