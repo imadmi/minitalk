@@ -1,28 +1,47 @@
+SERVER	=	server
+CLIENT	=	client
+SERVERB	=	server_bonus
+CLIENTB	=	client_bonus
 #ft_printf Variables:
 LIBFTPRINTF	=	ft_printf/libftprintf.a
 
 #minitalk variables
 SRC_C	=	ft_client.c
 SRC_S	=	ft_server.c
+SRCB_C	=	ft_client_bonus.c
+SRCB_S	=	ft_server_bonus.c
 OBJ_S	=	ft_server.o
 OBJ_C	=	ft_client.o
+OBJB_S	=	ft_server_bonus.o
+OBJB_C	=	ft_client_bonus.o
 INC		=	ft_minitalk.h
 
 #Compiling Variables:
-CC			=	gcc
+CC			=	cc
 CFLAGS		=	-Wall -Wextra -Werror
 RM			=	rm -rf
 
-_SUCCESS	=	[\e[38;5;118mSUCCESS\e[0m]
-_INFO		=	[\e[38;5;226mINFO\e[0m]
+_SUCCESS	=	\e[38;5;118m[SUCCESS]\e[0m
+_INFO		=	\e[38;5;226m[INFO]\e[0m
 
-all: $(LIBFTPRINTF) client server
+all: $(LIBFTPRINTF) $(CLIENT) $(SERVER)
 
-server: $(OBJ_S) $(INC)
+bonus: $(LIBFTPRINTF) $(CLIENTB) $(SERVERB)
+
+$(SERVERB): $(OBJB_S) $(INC)
+	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJB_S)
+	@printf "$(_SUCCESS) server ready.\n"
+
+$(CLIENTB): $(OBJB_C) $(INC)
+	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJB_C)
+	clear
+	@printf "$(_SUCCESS) client ready.\n"
+
+$(SERVER): $(OBJ_S) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_S)
 	@printf "$(_SUCCESS) server ready.\n"
 
-client: $(OBJ_C) $(INC)
+$(CLIENT): $(OBJ_C) $(INC)
 	@ $(CC) $(CFLAGS) $(LIBFTPRINTF) -o $@ $(OBJ_C)
 	clear
 	@printf "$(_SUCCESS) client ready.\n"
@@ -35,13 +54,13 @@ $(LIBFTPRINTF):
 
 clean:
 	@ $(MAKE) clean -C ft_printf
-	@ $(RM) $(OBJ_C) $(OBJ_S)
+	@ $(RM) $(OBJ_C) $(OBJ_S) $(OBJB_C) $(OBJB_S)
 	clear
 	@printf "$(_INFO) object files removed.\n"
 
 fclean: clean
 	@ $(MAKE) fclean -C ft_printf
-	@ $(RM) client server
+	@ $(RM) client server client_bonus server_bonus
 	clear
 	@printf "$(_INFO) client removed.\n"
 	@printf "$(_INFO) server removed.\n"

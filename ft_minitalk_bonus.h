@@ -1,32 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isdigit.c                                       :+:      :+:    :+:   */
+/*   ft_minitalk_bonus.h                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/17 16:24:24 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/20 00:49:07 by imimouni         ###   ########.fr       */
+/*   Created: 2022/12/20 14:52:37 by imimouni          #+#    #+#             */
+/*   Updated: 2023/01/20 04:17:21 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#ifndef FT_MINITALK_BONUS_H
+# define FT_MINITALK_BONUS_H
 
-int	ft_isdigit(char *c)
-{
-	int	l;
-	int	i;
+# include <signal.h>
+# include <unistd.h>
+# include "ft_printf/ft_printf.h"
 
-	i = 0;
-	l = ft_strlen(c);
-	while (l)
-	{
-		if (c[i] >= '0' && c[i] <= '9')
-			return (1);
-		else
-			return (0);
-		l--;
-		i++;
-	}
-	return (0);
-}
+void	wssl(int signum);
+void	bit_sender(int pid, char *s);
+void	action(int siguser, siginfo_t *info, void *context);
+
+#endif

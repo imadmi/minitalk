@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_server.c                                        :+:      :+:    :+:   */
+/*   ft_server_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:30 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/20 04:22:05 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/20 04:22:53 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk.h"
+#include "ft_minitalk_bonus.h"
 
 int	main(int ac, char **av)
 {
@@ -21,8 +21,8 @@ int	main(int ac, char **av)
 	{
 		act.sa_sigaction = action;
 		act.sa_flags = SA_SIGINFO;
-		sigaction(SIGUSR1, &act, NULL);
-		sigaction(SIGUSR2, &act, NULL);
+		sigaction(SIGUSR1, &act, 0);
+		sigaction(SIGUSR2, &act, 0);
 		ft_printf("PID: %d\n", getpid());
 		while (1)
 			pause();
@@ -56,6 +56,9 @@ void	action(int siguser, siginfo_t *info, void *context)
 	if (bit == 8)
 	{
 		write(1, &c, 1);
+		if (c == '\0')
+			if (kill(sender_pid, SIGUSR1) == -1)
+				exit(EXIT_FAILURE);
 		bit = 0;
 		c = (char)255;
 	}

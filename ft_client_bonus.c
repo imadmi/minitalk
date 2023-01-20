@@ -1,21 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_client.c                                        :+:      :+:    :+:   */
+/*   ft_client_bonus.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: imimouni <imimouni@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 14:52:46 by imimouni          #+#    #+#             */
-/*   Updated: 2023/01/20 04:23:20 by imimouni         ###   ########.fr       */
+/*   Updated: 2023/01/20 04:18:04 by imimouni         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_minitalk.h"
+#include "ft_minitalk_bonus.h"
 
 int	main(int ac, char **av)
 {
 	if (ac == 3)
 	{
+		signal(SIGUSR1, wssl);
 		if (ft_isdigit(av[1]) == 1)
 			bit_sender(ft_atoi(av[1]), av[2]);
 		exit (0);
@@ -53,4 +54,11 @@ void	bit_sender(int pid, char *s)
 			break ;
 		i++;
 	}
+}
+
+void	wssl(int siguser)
+{
+	if (siguser == SIGUSR1)
+		ft_printf("\033[0;32mmessage sent successfully\033[0m\n");
+	exit (EXIT_SUCCESS);
 }
